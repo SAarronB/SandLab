@@ -30,8 +30,8 @@ public class SandLab
     // Each value needs a name for the button
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
-    names[WATER] = "Water";
-    names[DIRT] = "Dirst";
+    names[WATER] = "Liquid Oxygen";
+    names[DIRT] = "Dirt";
     
     //1. Add code to initialize the data member grid with same dimensions
     grid = new int [numRows][numCols];
@@ -85,11 +85,45 @@ public class SandLab
   {
     //Remember, you need to access both row and column to specify a spot in the array
     //The scalar refers to how big the value could be
-    //int someRandom = (int) (Math.random() * scalar)
+    int someRandomRow = (int) (Math.random() * (grid.length));
+    int someRandomCol = (int) (Math.random() * (grid[0].length));
+    int randomChoice = (int) (Math.random() * 3);
     //remember that you need to watch for the edges of the array
-    
-    
-  }
+    if(grid[someRandomRow][someRandomCol] == WATER) {
+    	int nContain;
+    	if((someRandomRow + 1 < grid.length) && (grid[someRandomRow + 1][someRandomCol] == EMPTY
+    									  && grid[someRandomRow + 1][someRandomCol] != DIRT
+										  && grid[someRandomRow + 1][someRandomCol] != METAL)){
+    		nContain = grid[someRandomRow + 1][someRandomCol];
+    		grid[someRandomRow][someRandomCol] = nContain;
+    		grid[someRandomRow + 1][someRandomCol] = WATER;
+    	}else if((someRandomCol - 1 >= 0) && (grid[someRandomRow][someRandomCol - 1] == EMPTY
+    													&& grid[someRandomRow][someRandomCol - 1] != DIRT
+    													&& grid[someRandomRow][someRandomCol - 1] != METAL)) {
+    		nContain = grid[someRandomRow][someRandomCol - 1];
+    		grid[someRandomRow][someRandomCol] = nContain;
+    		grid[someRandomRow][someRandomCol] = WATER;
+    		
+    	}
+    }
+    	
+    if(grid[someRandomRow][someRandomCol] == DIRT) {
+    	int temp;
+    	if((someRandomRow + 1 < grid.length) && (grid[someRandomRow + 1][someRandomCol] == EMPTY
+				  									|| grid[someRandomRow + 1][someRandomCol] == WATER)){
+    				temp = grid[someRandomRow + 1][someRandomCol];
+    				grid[someRandomRow][someRandomCol] = temp;
+    				grid[someRandomRow + 1][someRandomCol] = DIRT;
+    	}else if((someRandomCol - 1 >= 0) && (grid[someRandomRow][someRandomCol - 1] == EMPTY
+																&& grid[someRandomRow][someRandomCol - 1] != WATER)) {
+    			temp = grid[someRandomRow][someRandomCol - 1];
+    			grid[someRandomRow][someRandomCol] = temp;
+    			grid[someRandomRow][someRandomCol - 1] = DIRT;
+    	}else {
+    		
+    	}
+    }
+ }
   
   //do not modify this method!
   public void run()
