@@ -104,6 +104,8 @@ public class SandLab
     		grid[someRandomRow][someRandomCol] = nContain;
     		grid[someRandomRow][someRandomCol] = WATER;
     		
+    	}else {
+    		
     	}
     }
     	
